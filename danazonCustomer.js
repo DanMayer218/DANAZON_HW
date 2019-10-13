@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
+var table = require("cli-table");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -22,11 +23,24 @@ function afterConnection() {
     connection.query("SELECT * FROM products", function(err, res) {
       if (err) throw err;
       // Log all results of the SELECT statement
-      console.log(res);
+      // console.log(res);
+      var table = new Table({   //syntax to create table from cli-table npm
+        head: [('item_id'), ('product_name'), ('price'), ('stock_quantity')],
+        colWidths: [5, 70, 13, 10]
+    });
+    for (var i = 0; i < results.length; i++){   //loop through all records of the db table
+    table.push(   //push each record from the bd table to the cli table
+        [(JSON.parse(JSON.stringify(results))[i]["item_id"]), (JSON.parse(JSON.stringify(results))[i]["product_name"]),
+        ("$ "+JSON.parse(JSON.stringify(results))[i]["price"]), (JSON.parse(JSON.stringify(results))[i]["stock_quantity"])]);
+}
+});
+}
+
+showItemTable();
+
       doubleprompt();
     //   connection.end();
-    });
-  };
+  ;
   var doublePrompt = inquirer.prompt([
       {
           type: "input",
@@ -51,8 +65,7 @@ function afterConnection() {
         }
          else{                                                   //if user order quantity can be fullfilled...
 					stock_quantity -= quantity;                             //subtract the users purchase qty from the store stock qty               
-            }
-          })
-        //  for (var i = 0; i < results.length; i++) {
-        //     if (results[i].purchase_amount === answer.item_id) {
-        //       userSelection = results[i];
+            };
+          });
+        }
+    )
