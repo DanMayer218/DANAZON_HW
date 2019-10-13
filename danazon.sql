@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS danazon_db;
+-- DROP DATABASE IF EXISTS danazon_db;
 
-CREATE DATABASE danazon_db;
+-- CREATE DATABASE danazon_db;
 USE danazon_db;
 
 CREATE TABLE products (
