@@ -21,6 +21,31 @@ function afterConnection() {
       if (err) throw err;
       // Log all results of the SELECT statement
       console.log(res);
-      connection.end();
+      doubleprompt();
+    //   connection.end();
     });
   }
+  var doubleprompt = inquirer.prompt(
+      [
+          type: "input",
+          message: "What is the ID of the product you want to buy",
+          name: "purchase_id"
+      ],
+      [
+          type: 'input',
+          message: "how many units are you purchasing?",
+          name: "purchase_amount"
+      ]
+      ).then(function(user) {
+       var userSelection;
+       for (var i = 0; i < results.length; i++) {
+        if (results[i].purchase_id === answer.item_id) {
+          userSelection = results[i];
+            if(purchase_amount < userSelection.stock_quantity) {
+                
+            }
+        //  for (var i = 0; i < results.length; i++) {
+        //     if (results[i].purchase_amount === answer.item_id) {
+        //       userSelection = results[i];
+      });
+
