@@ -2,6 +2,8 @@ var inquirer = require("inquirer");
 var mysql = require("mysql");
 var table = require('cli-table');
 var colors = require("colors");
+var bodyParser = ("body-parser");
+
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -13,14 +15,22 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId);
+    // console.log("connected as id " + connection.threadId);
 });
 
-function afterConnection() {
-    console.log("Time to loosen up the grip on your debit card, just look at this list of magical items for sale...\n");
-    connection.query("SELECT * FROM products", function(err, res) {
-      if (err) throw error;
-    
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// function afterConnection() {
+//     console.log("Time to loosen up the grip on your debit card, just look at this list of magical items for sale...\n");
+//     connection.query("SELECT * FROM products", function(err, res) {
+//       if (err) throw error;
+      var afterconnection =
+      function displayItemTable() {
+          console.log("Time to loosen up the grip on your debit card, just look at this list of magical items for sale...\n");
+          connection.query("SELECT * FROM products", function(err, res) {
+            if (err) throw err;
+            // Log all results of the SELECT statement
+            // console.log(res);
     
     
       console.log(res.json);
