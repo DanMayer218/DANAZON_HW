@@ -13,31 +13,36 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    // console.log("connected as id " + connection.threadId);
-    // afterConnection();
+    console.log("connected as id " + connection.threadId);
 });
 
 function afterConnection() {
-    // console.log("Time to loosen up the grip on your debit card, just look at this list of magical items for sale...\n");
+    console.log("Time to loosen up the grip on your debit card, just look at this list of magical items for sale...\n");
     connection.query("SELECT * FROM products", function(err, res) {
-      if (err) throw err;
-      // Log all results of the SELECT statement
-      var table = new Table({ 
-        head: [colors.cyan('item_id'), colors.cyan('product_name'), colors.cyan('department_name'), colors.cyan('price'), colors.cyan('stock_quantity')],
-                colWidths: [5, 70, 13, 10]
-            });
-            for (var i = 0; i < results.length; i++){
-              table.push(
-                [(JSON.parse(JSON.stringify(results))[i]["item_id"]), (JSON.parse(JSON.stringify(results))[i]["product_name"]),
-                ("$ "+JSON.parse(JSON.stringify(results))[i]["price"]), (JSON.parse(JSON.stringify(results))[i]["stock_quantity"])]);
-        }
-        console.log(colors.green('_______________________________________________________________________________________________________'));
-        console.log("\n" + table.toString());  //prints the constructed cli-table to screen
-        console.log(colors.green('_______________________________________________________________________________________________________'));
-        console.log("");
+      if (err) throw error;
+    
+    
+    
+      console.log(res.json);
     });
-}
-afterConnection();
+  };
+//       // Log all results of the SELECT statement
+//       var table = new Table({ 
+//         head: [colors.cyan('item_id'), colors.cyan('product_name'), colors.cyan('department_name'), colors.cyan('price'), colors.cyan('stock_quantity')],
+//                 colWidths: [5, 70, 13, 10]
+//             });
+//             for (var i = 0; i < results.length; i++){
+//               table.push(
+//                 [(JSON.parse(JSON.stringify(results))[i]["item_id"]), (JSON.parse(JSON.stringify(results))[i]["product_name"]),
+//                 ("$ "+JSON.parse(JSON.stringify(results))[i]["price"]), (JSON.parse(JSON.stringify(results))[i]["stock_quantity"])]);
+//         }
+//         console.log(colors.green('_______________________________________________________________________________________________________'));
+//         console.log("\n" + table.toString());  //prints the constructed cli-table to screen
+//         console.log(colors.green('_______________________________________________________________________________________________________'));
+//         console.log("");
+//     });
+// }
+// afterConnection();
 // showItemTable();
       // console.log(res);
       // connection.end();
